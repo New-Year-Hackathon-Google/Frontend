@@ -1,27 +1,37 @@
-import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
-import { useGoogleAuth } from '../../hooks/useGoogleAuth';
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-export default function GoogleAuthButton() {
-  const { mutate, isPending } = useGoogleAuth();
+const GOOGLE_CLIENT_ID =
+  '456402998987-j78715oai514o36tn2cjkbqfhfp1jn1g.apps.googleusercontent.com';
+const BACKEND_CALLBACK_URL = 'http://localhost:5000/auth/google/callback'; // 백엔드 콜백 URL
 
-  const handleLoginSuccess = (credentialResponse: CredentialResponse) => {
-    const idToken = credentialResponse.credential;
-    if (!idToken) {
-      console.error('Google ID Token is missing');
-      return;
+const GoogleLogin = () => {
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const jwtToken = searchParams.get('token');
+    if (jwtToken) {
+      localStorage.setItem('jwt', jwtToken);
+      console.log('JWT Token saved:', jwtToken);
+
+      window.location.href = '/';
     }
-    mutate(idToken); // ID Token을 백엔드로 전달
+  }, [searchParams]);
+
+  const handleLogin = () => {
+    const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${BACKEND_CALLBACK_URL}&scope=openid%20email%20profile`;
+
+    window.location.href = googleLoginUrl;
   };
 
   return (
-    <div>
-      <GoogleLogin
-        onSuccess={handleLoginSuccess}
-        onError={() => {
-          console.log('Google login failed');
-        }}
-      />
-      {isPending && <p>Authenticating...</p>}
-    </div>
+    <button
+      onClick={handleLogin}
+      className='rounded-3xl bg-blue-400 p-3 font-bold text-white duration-200 hover:scale-110'
+    >
+      Login with Google
+    </button>
   );
-}
+};
+
+export default GoogleLogin;

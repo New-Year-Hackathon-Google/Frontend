@@ -32,9 +32,12 @@ const Navbar = () => {
         <MobileDropdown />
 
         <div className='hidden items-center md:flex'>
-          <button className='rounded-xl bg-blue-300 p-2 font-semibold text-white duration-200 hover:scale-110'>
+          <Link
+            to='/login'
+            className='rounded-xl bg-blue-300 p-2 font-semibold text-white duration-200 hover:scale-110'
+          >
             로그인
-          </button>
+          </Link>
         </div>
       </div>
     </nav>
