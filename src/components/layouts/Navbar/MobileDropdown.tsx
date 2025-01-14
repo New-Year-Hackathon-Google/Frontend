@@ -56,7 +56,7 @@ export default function MobileDropdown() {
 
       {/* 드롭다운 메뉴 */}
       {isOpen && (
-        <div className='absolute right-0 mt-2 w-40 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5'>
+        <div className='absolute right-0 z-50 mt-2 w-40 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5'>
           <div className='py-1'>
             {navItems.map((item, index) => (
               <div key={item.title}>
