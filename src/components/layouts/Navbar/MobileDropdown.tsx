@@ -1,22 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const navItems = [
+interface NavItem {
+  title: string;
+  href: string;
+}
+
+const navItems: NavItem[] = [
   { title: '홈', href: '/' },
   { title: '소개', href: '/about' },
   { title: '서비스', href: '/service' },
 ];
 
 export default function MobileDropdown() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
+  const closeMenu = (e: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(e.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('mousedown', closeMenu);
+    } else {
+      document.removeEventListener('mousedown', closeMenu);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', closeMenu);
+    };
+  }, [isOpen]);
+
   return (
-    <div className='relative'>
+    <div className='relative' ref={dropdownRef}>
       {/* 메뉴 토글 버튼 */}
       <div className='flex items-center md:hidden'>
         <button
