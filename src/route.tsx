@@ -2,8 +2,19 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import Navbar from './components/layouts/Navbar/Navbar';
+import AboutPage from './pages/AboutPage';
+import ServicePage from './pages/ServicePage';
 
 const router = createBrowserRouter([
+  {
+    path: '/login',
+    element: (
+      <>
+        <Navbar />
+        <LoginPage />
+      </>
+    ),
+  },
   {
     path: '/',
 
@@ -15,11 +26,20 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/login',
+    path: '/about',
     element: (
       <>
         <Navbar />
-        <LoginPage />{' '}
+        <AboutPage />
+      </>
+    ),
+  },
+  {
+    path: '/service',
+    element: (
+      <>
+        <Navbar />
+        <ServicePage />
       </>
     ),
   },
