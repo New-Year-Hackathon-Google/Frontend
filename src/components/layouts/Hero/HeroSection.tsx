@@ -23,7 +23,7 @@ const HeroSection = () => {
         </p>
 
         {/* CTA Buttons */}
-        <div className='flex flex-col items-center justify-center gap-4 sm:flex-row'>
+        <div className='flex flex-row items-center justify-center gap-4'>
           <button className='group flex items-center rounded-full bg-white px-8 py-3 font-semibold text-purple-600 transition-all duration-200 hover:bg-opacity-90'>
             Get Started
             <ArrowRight className='ml-2 transition-transform group-hover:translate-x-1' />
