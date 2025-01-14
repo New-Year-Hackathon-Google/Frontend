@@ -15,11 +15,11 @@ const HeroSection = () => {
       {/* Main Content */}
       <div className='relative z-10 px-4 text-center sm:px-6 lg:px-8'>
         <h1 className='animate-fade-in-up mb-6 text-4xl font-bold text-white sm:text-6xl'>
-          Welcome to the Future
+          Welcome to the GDG Service
         </h1>
         <p className='mx-auto mb-8 max-w-2xl text-xl text-white/90 sm:text-2xl'>
-          Build something amazing with our cutting-edge platform. Start your
-          journey today and transform your ideas into reality.
+          Build something amazing with our GDG service. Start your journey today
+          and transform your ideas into reality.
         </p>
 
         {/* CTA Buttons */}
