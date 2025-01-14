@@ -1,8 +1,23 @@
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 const GOOGLE_CLIENT_ID =
   '456402998987-j78715oai514o36tn2cjkbqfhfp1jn1g.apps.googleusercontent.com';
 const BACKEND_CALLBACK_URL = 'http://localhost:5000/auth/google/callback'; // 백엔드 콜백 URL
 
 const GoogleLogin = () => {
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const jwtToken = searchParams.get('token');
+    if (jwtToken) {
+      localStorage.setItem('jwt', jwtToken);
+      console.log('JWT Token saved:', jwtToken);
+
+      window.location.href = '/';
+    }
+  }, [searchParams]);
+
   const handleLogin = () => {
     const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${BACKEND_CALLBACK_URL}&scope=openid%20email%20profile`;
 
